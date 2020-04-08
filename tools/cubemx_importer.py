@@ -147,8 +147,13 @@ if __name__ == "__main__":
     copy_doxyfile(sys.argv[1])
     mod_flash_address(sys.argv[1])
 
-    print(f'format the code! (ctrl+shift+F)')
-    # print(f'merge the code of stm32_notes.txt and main.c!') # TODO: script this
-    print(f'define the STM32F103xB macro in your Eclipse project! (debug and release also)')
-    print(f'Add src folder in Middlewares to the include folders! (debug and release also)')
-    print(f'Add -Wno-unused-parameter compiler option if necessary.')
+    # postprocess instructions
+    print(f'The generated source files have been overwritten. Manually added changes have been lost.\n'
+          f'Please format the code. (ctrl+shift+F).\n'
+          f'Please define the STM32F103xB macro in your Eclipse project (debug and release also).'
+          f' This is required for building. \n'
+          f'Add src folder in Middlewares to the include folders if necessary (debug and release also).'
+          f' This is required for building.\n'
+          f'Add -Wno-unused-parameter compiler option if necessary.'
+          f' 0 warnings should be displayed with this option enabled while building the unmodified base configuration.')
+
