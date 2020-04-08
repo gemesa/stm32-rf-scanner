@@ -4,6 +4,7 @@ import shutil
 
 from distutils.dir_util import copy_tree
 
+
 def delete_src(eclipse_path: str) -> None:
     """
     Delete obsolete C source files from the Eclipse project.
@@ -30,6 +31,7 @@ def delete_src(eclipse_path: str) -> None:
             print(f'{path}\n'
                   f'not found\n')
     print(f'--------------')
+
 
 def copy_src(eclipse_path: str,
              cubemx_path: str) -> None:
@@ -87,6 +89,7 @@ def copy_src(eclipse_path: str,
           f'{cmsis_src_path_2}\n'
           f'--------------')
 
+
 def mod_flash_address(eclipse_path: str) -> None:
     """
     Modify the starting flash address from 0x00000000 to 0x08000000.
@@ -102,7 +105,7 @@ def mod_flash_address(eclipse_path: str) -> None:
         if "FLASH (rx) : ORIGIN = 0x00000000" in buf:
             print(f'Wrong flash address (0x00000000).')
             buf = buf.replace("FLASH (rx) : ORIGIN = 0x00000000",
-                        "FLASH (rx) : ORIGIN = 0x08000000")
+                              "FLASH (rx) : ORIGIN = 0x08000000")
             print(f'Flash address has been replaced.\n'
                   f'--------------')
         elif "FLASH (rx) : ORIGIN = 0x08000000" in buf:
@@ -111,6 +114,7 @@ def mod_flash_address(eclipse_path: str) -> None:
 
     with open(path, "w") as file:
         file.write(buf)
+
 
 def copy_doxyfile(eclipse_path: str) -> None:
     """
@@ -127,6 +131,7 @@ def copy_doxyfile(eclipse_path: str) -> None:
           f'{os.path.join(eclipse_path, "stm32.Doxyfile")}\n'
           f'--------------\n')
     shutil.copyfile(doxyfile_path, os.path.join(eclipse_path, "stm32.Doxyfile"))
+
 
 if __name__ == "__main__":
     print(f'cubemximporter is running...\n'
