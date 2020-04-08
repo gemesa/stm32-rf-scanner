@@ -128,9 +128,14 @@ def copy_doxyfile(eclipse_path: str) -> None:
     doxyfile_path = "F:\STM32\stm32.Doxyfile"
     print(f'Copy {doxyfile_path}\n'
           f'to\n'
-          f'{os.path.join(eclipse_path, "stm32.Doxyfile")}\n'
-          f'--------------\n')
-    shutil.copyfile(doxyfile_path, os.path.join(eclipse_path, "stm32.Doxyfile"))
+          f'{os.path.join(eclipse_path, "stm32.Doxyfile")}\n')
+    try:
+        shutil.copyfile(doxyfile_path, os.path.join(eclipse_path, "stm32.Doxyfile"))
+    except Exception as e:
+        # .Doxyfile might not exist TODO: clean this up, make this an argument maybe
+        print(e)
+
+    print(f'--------------')
 
 
 if __name__ == "__main__":
@@ -146,4 +151,4 @@ if __name__ == "__main__":
     # print(f'merge the code of stm32_notes.txt and main.c!') # TODO: script this
     print(f'define the STM32F103xB macro in your Eclipse project! (debug and release also)')
     print(f'Add src folder in Middlewares to the include folders! (debug and release also)')
-
+    print(f'Add -Wno-unused-parameter compiler option if necessary.')
