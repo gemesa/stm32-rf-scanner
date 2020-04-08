@@ -119,23 +119,23 @@ def mod_flash_address(eclipse_path: str) -> None:
         file.write(buf)
 
 
-def copy_doxyfile(eclipse_path: str) -> None:
+def copy_doxyfile(eclipse_path: str,
+                  doxyfile_path: str) -> None:
     """
     Copy the backup .doxyfile to the Eclipse project.
     Args:
         eclipse_path:
+        doxyfile_path:
 
     Returns:
 
     """
-    doxyfile_path = "F:\STM32\stm32.Doxyfile"
     print(f'Copy {doxyfile_path}\n'
           f'to\n'
           f'{os.path.join(eclipse_path, "stm32.Doxyfile")}\n')
     try:
         shutil.copyfile(doxyfile_path, os.path.join(eclipse_path, "stm32.Doxyfile"))
     except Exception as e:
-        # .Doxyfile might not exist TODO: clean this up, make this an argument maybe
         print(e)
 
     print(f'--------------')
@@ -147,7 +147,7 @@ if __name__ == "__main__":
 
     delete_src(sys.argv[1])
     copy_src(sys.argv[1], sys.argv[2])
-    copy_doxyfile(sys.argv[1])
+    copy_doxyfile(sys.argv[1], sys.argv[3])
     mod_flash_address(sys.argv[1])
 
     # postprocess instructions
