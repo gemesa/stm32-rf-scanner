@@ -109,10 +109,11 @@ def mod_flash_address(eclipse_path: str) -> None:
             print(f'Wrong flash address (0x00000000).')
             buf = buf.replace("FLASH (rx) : ORIGIN = 0x00000000",
                               "FLASH (rx) : ORIGIN = 0x08000000")
-            print(f'Flash address has been replaced.\n'
+            print(f'Flash address has been corrected (0x00000000 --> 0x08000000).\n'
                   f'--------------')
         elif "FLASH (rx) : ORIGIN = 0x08000000" in buf:
-            print(f'Correct flash address (0x08000000).\n'
+            print(f'Correct flash address (0x08000000) has been found.\n'
+                  f'mem.ld has not been modified.\n'
                   f'--------------')
 
     with open(path, "w") as file:
