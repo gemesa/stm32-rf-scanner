@@ -1,3 +1,6 @@
+# author: gemesa
+# Python version: 3.8.2
+
 import sys
 import os
 import shutil
