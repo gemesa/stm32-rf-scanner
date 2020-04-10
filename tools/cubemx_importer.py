@@ -6,6 +6,9 @@ import os
 import shutil
 
 from distutils.dir_util import copy_tree
+from termcolor import colored
+# colorama init is necessary for termcolor on Windows
+from colorama import init
 
 
 def delete_src(eclipse_path: str) -> None:
@@ -24,16 +27,18 @@ def delete_src(eclipse_path: str) -> None:
                        "include\\Timer.h",
                        "system\\src\\newlib\\_sbrk.c"]
 
+    # colorama init is necessary for termcolor on Windows
+    init()
+
     for file in files_to_delete:
         path = os.path.join(eclipse_path, file)
         if os.path.isfile(path):
             os.remove(path)
-            print(f'{path}\n'
-                  f'deleted\n')
+            print(f'{colored("delete", "red")} {path}')
         else:
-            print(f'{path}\n'
-                  f'not found\n')
-    print(f'--------------')
+            print(f'{colored("not found", "yellow")} {path}')
+
+    print(f'\n--------------\n')
 
 
 def copy_src(eclipse_path: str,
@@ -62,35 +67,42 @@ def copy_src(eclipse_path: str,
             eclipse_src_path = os.path.join(eclipse_path, path[0])
             cubemx_src_path = os.path.join(cubemx_path, path[1])
             copy_tree(cubemx_src_path, eclipse_src_path)
-            print(f'Copy\n'
-                  f'{cubemx_src_path}\n'
-                  f'to\n'
-                  f'{eclipse_src_path}\n')
+            print(f'{colored("copy", "green")} {cubemx_src_path}\n'
+                  f'{colored("to  ", "green")} {eclipse_src_path}\n')
     except Exception as e:
         # Middlewares folder is generated only when you use FATFS, FREERTOS or USB_DEVICE
-        print(e)
+        print('No middleware has been configured.')
+        print(f'{e}\n')
 
-    print(f'--------------')
+    print(f'--------------\n')
 
     # gen_doc is the input folder of doxygen
-    print(f'move generated files to the gen_doc folder\n')
     if not os.path.isdir(os.path.join(eclipse_path, "src\gen_doc")):
         os.mkdir(os.path.join(eclipse_path, "src\gen_doc"))
 
     # TODO: update this with new files if necessary
-    os.replace(os.path.join(eclipse_path, "src\main.c"), os.path.join(eclipse_path, "src\gen_doc\main.c"))
-    os.replace(os.path.join(eclipse_path, "src\stm32f1xx_it.c"), os.path.join(eclipse_path, "src\gen_doc\stm32f1xx_it.c"))
+    main_c_src = os.path.join(eclipse_path, "src\main.c")
+    main_c_dest = os.path.join(eclipse_path, "src\gen_doc\main.c")
+    print(f'{colored("move", "green")} {main_c_src}\n'
+          f'{colored("to  ", "green")} {main_c_dest}\n')
+    os.replace(main_c_src, main_c_dest)
 
-    print(f'--------------')
+    stm32f1xx_it_c_src = os.path.join(eclipse_path, "src\stm32f1xx_it.c")
+    stm32f1xx_it_c_dest = os.path.join(eclipse_path, "src\gen_doc\stm32f1xx_it.c")
+    print(f'{colored("move", "green")} {stm32f1xx_it_c_src}\n'
+          f'{colored("to  ", "green")} {stm32f1xx_it_c_dest}\n')
+    os.replace(stm32f1xx_it_c_src, stm32f1xx_it_c_dest)
+
+    print(f'--------------\n')
 
     # rename *.s to *.S
-    cmsis_src_path_1 = os.path.join(eclipse_path, "system\src\cmsis\startup_stm32f103xb.s")
-    cmsis_src_path_2 = os.path.join(eclipse_path, "system\src\cmsis\startup_stm32f103xb.S")
-    os.rename(cmsis_src_path_1, cmsis_src_path_2)
-    print(f'{cmsis_src_path_1}\n'
-          f'has been renamed to\n'
-          f'{cmsis_src_path_2}\n'
-          f'--------------')
+    cmsis_src = os.path.join(eclipse_path, "system\src\cmsis\startup_stm32f103xb.s")
+    cmsis_dest = os.path.join(eclipse_path, "system\src\cmsis\startup_stm32f103xb.S")
+    print(f'{colored("rename", "green")} {cmsis_src}\n'
+          f'{colored("to    ", "green")} {cmsis_dest}\n')
+    os.rename(cmsis_src, cmsis_dest)
+
+    print(f'--------------\n')
 
 
 def mod_flash_address(eclipse_path: str) -> None:
@@ -103,21 +115,21 @@ def mod_flash_address(eclipse_path: str) -> None:
 
     """
     path = os.path.join(eclipse_path, "ldscripts\\mem.ld")
+    wrong_address = 'FLASH (rx) : ORIGIN = 0x00000000'
+    correct_address = 'FLASH (rx) : ORIGIN = 0x08000000'
     with open(path, "r") as file:
         buf = file.read()
-        if "FLASH (rx) : ORIGIN = 0x00000000" in buf:
-            print(f'Wrong flash address (0x00000000).')
-            buf = buf.replace("FLASH (rx) : ORIGIN = 0x00000000",
-                              "FLASH (rx) : ORIGIN = 0x08000000")
-            print(f'Flash address has been corrected (0x00000000 --> 0x08000000).\n'
-                  f'--------------')
-        elif "FLASH (rx) : ORIGIN = 0x08000000" in buf:
-            print(f'Correct flash address (0x08000000) has been found.\n'
-                  f'mem.ld has not been modified.\n'
-                  f'--------------')
+        if wrong_address in buf:
+            print(f'{colored("replace", "green")} {wrong_address}\n'
+                  f'{colored("with   ", "green")} {correct_address}\n')
+            buf = buf.replace(wrong_address, correct_address)
+        elif correct_address in buf:
+            print(f'Flash address is correct (0x08000000). mem.ld has not been modified.\n')
 
     with open(path, "w") as file:
         file.write(buf)
+
+    print('--------------\n')
 
 
 def copy_doxyfile(eclipse_path: str,
@@ -131,16 +143,15 @@ def copy_doxyfile(eclipse_path: str,
     Returns:
 
     """
-    print(f'Copy\n'
-          f'{doxyfile_path}\n'
-          f'to\n'
-          f'{os.path.join(eclipse_path, "stm32.Doxyfile")}\n')
     try:
-        shutil.copyfile(doxyfile_path, os.path.join(eclipse_path, "stm32.Doxyfile"))
+        doxyfile_path_dest = os.path.join(eclipse_path, "stm32.Doxyfile")
+        print(f'{colored("copy", "green")} {doxyfile_path}\n'
+              f'{colored("to  ", "green")} {doxyfile_path_dest}\n')
+        shutil.copyfile(doxyfile_path, doxyfile_path_dest)
     except Exception as e:
-        print(e)
+        print(f'{e}\n')
 
-    print(f'--------------')
+    print(f'--------------\n')
 
 
 if __name__ == "__main__":
@@ -161,8 +172,8 @@ if __name__ == "__main__":
 
     # postprocess instructions
     print(f'The generated source files have been overwritten. Manually added changes have been lost.\n'
-          f'Please format the code. (ctrl+shift+F).\n'
-          f'Please define the STM32F103xB macro in your Eclipse project (debug and release also).'
+          f'Format the code. (ctrl+shift+F).\n'
+          f'Define the STM32F103xB macro in your Eclipse project (debug and release also).'
           f' This is required for building. \n'
           f'Add src folder in Middlewares to the include folders if necessary (debug and release also).'
           f' This is required for building.\n'
