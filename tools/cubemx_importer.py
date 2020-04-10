@@ -77,10 +77,12 @@ def copy_src(eclipse_path: str,
     print(f'--------------\n')
 
     # gen_doc is the input folder of doxygen
-    if not os.path.isdir(os.path.join(eclipse_path, "src\gen_doc")):
-        os.mkdir(os.path.join(eclipse_path, "src\gen_doc"))
+    gen_doc_path = os.path.join(eclipse_path, "src\gen_doc")
+    if not os.path.isdir(gen_doc_path):
+        os.mkdir(gen_doc_path)
 
-    # TODO: update this with new files if necessary
+    # update this with new files if necessary
+    # TODO: implement for loop
     main_c_src = os.path.join(eclipse_path, "src\main.c")
     main_c_dest = os.path.join(eclipse_path, "src\gen_doc\main.c")
     print(f'{colored("move", "green")} {main_c_src}\n'
