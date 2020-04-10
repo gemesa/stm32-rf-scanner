@@ -131,7 +131,8 @@ def copy_doxyfile(eclipse_path: str,
     Returns:
 
     """
-    print(f'Copy {doxyfile_path}\n'
+    print(f'Copy\n'
+          f'{doxyfile_path}\n'
           f'to\n'
           f'{os.path.join(eclipse_path, "stm32.Doxyfile")}\n')
     try:
@@ -144,22 +145,19 @@ def copy_doxyfile(eclipse_path: str,
 
 if __name__ == "__main__":
 
-    try:
-        eclipse_pj_path = sys.argv[1]
-        cubemx_pj_path = sys.argv[2]
-        stm32doxyfile_path = sys.argv[3]
-    except IndexError:
-        print("Please specify the input files:\n"
-              "python cubemx_importer.py <eclipse_project_path> <cubemx_project_path> <stm32doxyfile_path>")
+    if len(sys.argv) == 3:
+        delete_src(sys.argv[1])
+        copy_src(sys.argv[1], sys.argv[2])
+        mod_flash_address(sys.argv[1])
+    elif len(sys.argv) == 4:
+        delete_src(sys.argv[1])
+        copy_src(sys.argv[1], sys.argv[2])
+        mod_flash_address(sys.argv[1])
+        copy_doxyfile(sys.argv[1], sys.argv[3])
+    else:
+        print("Please specify the input files where <stm32doxyfile_path> is optional:\n"
+              "python cubemx_importer.py <eclipse_project_path> <cubemx_project_path> [<stm32doxyfile_path>]")
         sys.exit(1)
-
-    print(f'cubemximporter is running...\n'
-          f'--------------')
-
-    delete_src(eclipse_pj_path)
-    copy_src(eclipse_pj_path, cubemx_pj_path)
-    copy_doxyfile(eclipse_pj_path, stm32doxyfile_path)
-    mod_flash_address(eclipse_pj_path)
 
     # postprocess instructions
     print(f'The generated source files have been overwritten. Manually added changes have been lost.\n'
