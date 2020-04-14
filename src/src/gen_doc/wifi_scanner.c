@@ -113,7 +113,7 @@ static void get_freq_data(uint8_t aui8_rpd[])
              *      - signal is present for at least 40us
              *      - TSTBY2A + TDELAY_AGC = 130us + 40us wait time elapsed
              * this wait time is the bottleneck:
-             * NUM_OF_SCAN * NUM_OF_CH * (TSTBY2A + TDELAY_AGC) = 180 * 126 * (130 + 40) = 3855600us = 3.86s
+             * NUM_OF_SCAN * NUM_OF_CH * (TSTBY2A + TDELAY_AGC) = 180 * 126 * (130us + 40us) = 3855600us = 3.86s
              * speed can be increased by:
              *      - decreasing NUM_OF_SCAN
              *      - decreasing NUM_OF_CH
