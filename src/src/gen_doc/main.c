@@ -23,7 +23,8 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "util.h"
+#include "wifi_scanner.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -98,7 +99,8 @@ int main(void)
     MX_SPI1_Init();
     MX_TIM2_Init();
     /* USER CODE BEGIN 2 */
-
+    util_init();
+    wifi_scanner_init();
     /* USER CODE END 2 */
 
     /* Infinite loop */
@@ -106,7 +108,8 @@ int main(void)
     while (1)
     {
         /* USER CODE END WHILE */
-
+        wifi_scanner_step();
+        blink_led();
         /* USER CODE BEGIN 3 */
     }
     /* USER CODE END 3 */
