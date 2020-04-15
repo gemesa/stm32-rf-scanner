@@ -1,11 +1,9 @@
 /**
  ******************************************************************************
  * @file wifi_scanner.c
- * @brief Scans the 2.4..2.5GHz band with nrf24l01+
- * and plots the free and occupied frequencies through UART.
+ * @brief Scans frequencies from 2.400GHz to 2.525GHz (1MHz resolution)
+ * with nRF24L01+ and plots the activity on each frequency through UART.
  * @author gemesa
- * @details The SWC bypasses RTE and is directly connected to the HAL (SPI),
- * this results a complex driver architecture.
  ******************************************************************************
  */
 
@@ -44,8 +42,9 @@ static void nrf24l01p_init(void);
 
 /**
  * @brief Reads out a register through SPI.
- * @param reg
- * @return
+ * @author gemesa
+ * @param ui8_reg register address
+ * @return register value
  * @details
  * datasheet chapter:
  *      - 8
@@ -66,8 +65,9 @@ static uint8_t get_reg(uint8_t ui8_reg)
 
 /**
  * @brief Writes a register through SPI.
- * @param reg
- * @param val
+ * @author gemesa
+ * @param ui8_reg register address
+ * @param ui8_val register value
  * @details
  * datasheet chapter:
  *      - 8
@@ -86,6 +86,8 @@ static void set_reg(uint8_t ui8_reg, uint8_t ui8_val)
 
 /**
  * @brief Checks which frequencies (channels) are occupied.
+ * @author gemesa
+ * @param aui8_rpd pointer to RPD array
  * @details
  * datasheet chapter:
  *      - 6.1.4
@@ -133,6 +135,9 @@ static void get_freq_data(uint8_t aui8_rpd[])
 
 /**
  * @brief Finds max element in an array.
+ * @author gemesa
+ * @param aui8_array pointer to target array
+ * @param ui8_size size of target array
  */
 static uint8_t max_array(uint8_t aui8_array[], uint8_t ui8_size)
 {
@@ -153,6 +158,10 @@ static uint8_t max_array(uint8_t aui8_array[], uint8_t ui8_size)
 
 /**
  * @brief Calculates normalized values. Returns the maximum value in the default array.
+ * @author gemesa
+ * @param aui8_rpd pointer to RPD array
+ * @param aui8_rpd_norm pointer to normalized RPD array
+ * @param ui8_size size of RPD array (= size of normalized RPD array)
  */
 static uint8_t calc_norm(uint8_t aui8_rpd[], uint8_t aui8_rpd_norm[], uint8_t ui8_size)
 {
@@ -196,6 +205,8 @@ static uint8_t calc_norm(uint8_t aui8_rpd[], uint8_t aui8_rpd_norm[], uint8_t ui
 
 /**
  * @brief Plots which frequencies (channels) are occupied.
+ * @author gemesa
+ * @param aui8_rpd pointer to RPD array
  */
 static void plot_freq_data(uint8_t aui8_rpd[])
 {
@@ -222,11 +233,12 @@ static void plot_freq_data(uint8_t aui8_rpd[])
 
 /**
  * @brief Step function of the SWC.
+ * @author gemesa
  */
 void wifi_scanner_step(void)
 {
     /* array to store the counted RPD flags for each channel
-     * RPD flag indicates whether the frequency is free or occupied */
+     * an RPD flag indicates whether the frequency is free or occupied */
     uint8_t aui8_rpd[NUM_OF_CH];
     memset(aui8_rpd, 0u, sizeof aui8_rpd);
     get_freq_data(aui8_rpd);
@@ -235,6 +247,7 @@ void wifi_scanner_step(void)
 
 /**
  * @brief Init function of the SWC.
+ * @author gemesa
  */
 void wifi_scanner_init(void)
 {
@@ -243,6 +256,7 @@ void wifi_scanner_init(void)
 
 /**
  * @brief Plots the frequency layout.
+ * @author gemesa
  */
 static void plot_layout(void)
 {
@@ -257,6 +271,7 @@ static void plot_layout(void)
 
 /**
  * @brief Initializes the nrf24l01+ HW. Configures RX mode and POWER UP state.
+ * @author gemesa
  * @details
  * datasheet chapter:
  *      - 6.1.1

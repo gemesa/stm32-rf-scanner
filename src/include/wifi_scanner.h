@@ -1,11 +1,9 @@
 /**
  ******************************************************************************
- * @file wifi_scanner.h
- * @brief Scans the 2.4..2.5GHz band with nrf24l01+
- * and plots the free and occupied frequencies through UART.
+ * @file wifi_scanner.c
+ * @brief Scans frequencies from 2.400GHz to 2.525GHz (1MHz resolution)
+ * with nRF24L01+ and plots the activity on each frequency through UART.
  * @author gemesa
- * @details  The SWC bypasses RTE and is directly connected to the HAL (SPI),
- * this results a complex driver architecture.
  ******************************************************************************
  */
 
