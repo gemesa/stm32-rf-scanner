@@ -1,240 +1,220 @@
-/**************************************************************************//**
- * @file     <Device>.h
- * @brief    CMSIS Cortex-M# Core Peripheral Access Layer Header File for
- *           Device <Device>
- * @version  V3.10
- * @date     23. November 2012
- *
- * @note
- *
- ******************************************************************************/
-/* Copyright (c) 2012 ARM LIMITED
+/**
+  ******************************************************************************
+  * @file    stm32f1xx.h
+  * @author  MCD Application Team
+  * @brief   CMSIS STM32F1xx Device Peripheral Access Layer Header File. 
+  *
+  *          The file is the unique include file that the application programmer
+  *          is using in the C source code, usually in main.c. This file contains:
+  *            - Configuration section that allows to select:
+  *              - The STM32F1xx device used in the target application
+  *              - To use or not the peripheral’s drivers in application code(i.e. 
+  *                code will be based on direct access to peripheral’s registers 
+  *                rather than drivers API), this option is controlled by 
+  *                "#define USE_HAL_DRIVER"
+  *  
+  ******************************************************************************
+  * @attention
+  *
+  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics.
+  * All rights reserved.</center></h2>
+  *
+  * This software component is licensed by ST under BSD 3-Clause license,
+  * the "License"; You may not use this file except in compliance with the
+  * License. You may obtain a copy of the License at:
+  *                        opensource.org/licenses/BSD-3-Clause
+  *
+  ******************************************************************************
+  */
 
-   All rights reserved.
-   Redistribution and use in source and binary forms, with or without
-   modification, are permitted provided that the following conditions are met:
-   - Redistributions of source code must retain the above copyright
-     notice, this list of conditions and the following disclaimer.
-   - Redistributions in binary form must reproduce the above copyright
-     notice, this list of conditions and the following disclaimer in the
-     documentation and/or other materials provided with the distribution.
-   - Neither the name of ARM nor the names of its contributors may be used
-     to endorse or promote products derived from this software without
-     specific prior written permission.
-   *
-   THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
-   AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
-   IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
-   ARE DISCLAIMED. IN NO EVENT SHALL COPYRIGHT HOLDERS AND CONTRIBUTORS BE
-   LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
-   CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
-   SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
-   INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
-   CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
-   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-   POSSIBILITY OF SUCH DAMAGE.
-   ---------------------------------------------------------------------------*/
+/** @addtogroup CMSIS
+  * @{
+  */
 
-
-#ifndef Device_H      /* ToDo: replace '<Device>' with your device name */
-#define Device_H
+/** @addtogroup stm32f1xx
+  * @{
+  */
+    
+#ifndef __STM32F1XX_H
+#define __STM32F1XX_H
 
 #ifdef __cplusplus
  extern "C" {
+#endif /* __cplusplus */
+  
+/** @addtogroup Library_configuration_section
+  * @{
+  */
+
+/**
+  * @brief STM32 Family
+  */
+#if !defined (STM32F1)
+#define STM32F1
+#endif /* STM32F1 */
+
+/* Uncomment the line below according to the target STM32L device used in your 
+   application 
+  */
+
+#if !defined (STM32F100xB) && !defined (STM32F100xE) && !defined (STM32F101x6) && \
+    !defined (STM32F101xB) && !defined (STM32F101xE) && !defined (STM32F101xG) && !defined (STM32F102x6) && !defined (STM32F102xB) && !defined (STM32F103x6) && \
+    !defined (STM32F103xB) && !defined (STM32F103xE) && !defined (STM32F103xG) && !defined (STM32F105xC) && !defined (STM32F107xC)
+  /* #define STM32F100xB  */   /*!< STM32F100C4, STM32F100R4, STM32F100C6, STM32F100R6, STM32F100C8, STM32F100R8, STM32F100V8, STM32F100CB, STM32F100RB and STM32F100VB */
+  /* #define STM32F100xE */    /*!< STM32F100RC, STM32F100VC, STM32F100ZC, STM32F100RD, STM32F100VD, STM32F100ZD, STM32F100RE, STM32F100VE and STM32F100ZE */
+  /* #define STM32F101x6  */   /*!< STM32F101C4, STM32F101R4, STM32F101T4, STM32F101C6, STM32F101R6 and STM32F101T6 Devices */
+  /* #define STM32F101xB  */   /*!< STM32F101C8, STM32F101R8, STM32F101T8, STM32F101V8, STM32F101CB, STM32F101RB, STM32F101TB and STM32F101VB */
+  /* #define STM32F101xE */    /*!< STM32F101RC, STM32F101VC, STM32F101ZC, STM32F101RD, STM32F101VD, STM32F101ZD, STM32F101RE, STM32F101VE and STM32F101ZE */ 
+  /* #define STM32F101xG  */   /*!< STM32F101RF, STM32F101VF, STM32F101ZF, STM32F101RG, STM32F101VG and STM32F101ZG */
+  /* #define STM32F102x6 */    /*!< STM32F102C4, STM32F102R4, STM32F102C6 and STM32F102R6 */
+  /* #define STM32F102xB  */   /*!< STM32F102C8, STM32F102R8, STM32F102CB and STM32F102RB */
+  /* #define STM32F103x6  */   /*!< STM32F103C4, STM32F103R4, STM32F103T4, STM32F103C6, STM32F103R6 and STM32F103T6 */
+  /* #define STM32F103xB  */   /*!< STM32F103C8, STM32F103R8, STM32F103T8, STM32F103V8, STM32F103CB, STM32F103RB, STM32F103TB and STM32F103VB */
+  /* #define STM32F103xE */    /*!< STM32F103RC, STM32F103VC, STM32F103ZC, STM32F103RD, STM32F103VD, STM32F103ZD, STM32F103RE, STM32F103VE and STM32F103ZE */
+  /* #define STM32F103xG  */   /*!< STM32F103RF, STM32F103VF, STM32F103ZF, STM32F103RG, STM32F103VG and STM32F103ZG */
+  /* #define STM32F105xC */    /*!< STM32F105R8, STM32F105V8, STM32F105RB, STM32F105VB, STM32F105RC and STM32F105VC */
+  /* #define STM32F107xC  */   /*!< STM32F107RB, STM32F107VB, STM32F107RC and STM32F107VC */  
 #endif
 
-/* ToDo: replace '<Device>' with your device name; add your doxyGen comment   */
-/** @addtogroup <Device>_Definitions <Device> Definitions
-  This file defines all structures and symbols for <Device>:
-    - registers and bitfields
-    - peripheral base address
-    - peripheral ID
-    - Peripheral definitions
-  @{
-*/
+/*  Tip: To avoid modifying this file each time you need to switch between these
+        devices, you can define the device in your toolchain compiler preprocessor.
+  */
+  
+#if !defined  (USE_HAL_DRIVER)
+/**
+ * @brief Comment the line below if you will not use the peripherals drivers.
+   In this case, these drivers will not be included and the application code will 
+   be based on direct access to peripherals registers 
+   */
+  /*#define USE_HAL_DRIVER */
+#endif /* USE_HAL_DRIVER */
 
+/**
+  * @brief CMSIS Device version number V4.3.1
+  */
+#define __STM32F1_CMSIS_VERSION_MAIN   (0x04) /*!< [31:24] main version */
+#define __STM32F1_CMSIS_VERSION_SUB1   (0x03) /*!< [23:16] sub1 version */
+#define __STM32F1_CMSIS_VERSION_SUB2   (0x01) /*!< [15:8]  sub2 version */
+#define __STM32F1_CMSIS_VERSION_RC     (0x00) /*!< [7:0]  release candidate */ 
+#define __STM32F1_CMSIS_VERSION        ((__STM32F1_CMSIS_VERSION_MAIN << 24)\
+                                       |(__STM32F1_CMSIS_VERSION_SUB1 << 16)\
+                                       |(__STM32F1_CMSIS_VERSION_SUB2 << 8 )\
+                                       |(__STM32F1_CMSIS_VERSION_RC))
 
-/******************************************************************************/
-/*                Processor and Core Peripherals                              */
-/******************************************************************************/
-/** @addtogroup <Device>_CMSIS Device CMSIS Definitions
-  Configuration of the Cortex-M# Processor and Core Peripherals
-  @{
-*/
+/**
+  * @}
+  */
 
-/*
- * ==========================================================================
- * ---------- Interrupt Number Definition -----------------------------------
- * ==========================================================================
- */
+/** @addtogroup Device_Included
+  * @{
+  */
 
-typedef enum IRQn
+#if defined(STM32F100xB)
+  #include "stm32f100xb.h"
+#elif defined(STM32F100xE)
+  #include "stm32f100xe.h"
+#elif defined(STM32F101x6)
+  #include "stm32f101x6.h"
+#elif defined(STM32F101xB)
+  #include "stm32f101xb.h"
+#elif defined(STM32F101xE)
+  #include "stm32f101xe.h"
+#elif defined(STM32F101xG)
+  #include "stm32f101xg.h"
+#elif defined(STM32F102x6)
+  #include "stm32f102x6.h"
+#elif defined(STM32F102xB)
+  #include "stm32f102xb.h"
+#elif defined(STM32F103x6)
+  #include "stm32f103x6.h"
+#elif defined(STM32F103xB)
+  #include "stm32f103xb.h"
+#elif defined(STM32F103xE)
+  #include "stm32f103xe.h"
+#elif defined(STM32F103xG)
+  #include "stm32f103xg.h"
+#elif defined(STM32F105xC)
+  #include "stm32f105xc.h"
+#elif defined(STM32F107xC)
+  #include "stm32f107xc.h"
+#else
+ #error "Please select first the target STM32F1xx device used in your application (in stm32f1xx.h file)"
+#endif
+
+/**
+  * @}
+  */
+
+/** @addtogroup Exported_types
+  * @{
+  */  
+typedef enum 
 {
-/******  Cortex-M# Processor Exceptions Numbers ***************************************************/
+  RESET = 0, 
+  SET = !RESET
+} FlagStatus, ITStatus;
 
-#if defined(__ARM_ARCH_6M__)
-
-/* ToDo: use this Cortex interrupt numbers if your device is a CORTEX-M0 device                   */
-  NonMaskableInt_IRQn           = -14,      /*!<  2 Non Maskable Interrupt                        */
-  HardFault_IRQn                = -13,      /*!<  3 Hard Fault Interrupt                          */
-  SVCall_IRQn                   = -5,       /*!< 11 SV Call Interrupt                             */
-  PendSV_IRQn                   = -2,       /*!< 14 Pend SV Interrupt                             */
-  SysTick_IRQn                  = -1,       /*!< 15 System Tick Interrupt                         */
-
-#elif defined(__ARM_ARCH_7M__) || defined(__ARM_ARCH_7EM__)
-
-/* ToDo: use this Cortex interrupt numbers if your device is a CORTEX-M3 / Cortex-M4 device       */
-  NonMaskableInt_IRQn           = -14,      /*!<  2 Non Maskable Interrupt                        */
-  MemoryManagement_IRQn         = -12,      /*!<  4 Memory Management Interrupt                   */
-  BusFault_IRQn                 = -11,      /*!<  5 Bus Fault Interrupt                           */
-  UsageFault_IRQn               = -10,      /*!<  6 Usage Fault Interrupt                         */
-  SVCall_IRQn                   = -5,       /*!< 11 SV Call Interrupt                             */
-  DebugMonitor_IRQn             = -4,       /*!< 12 Debug Monitor Interrupt                       */
-  PendSV_IRQn                   = -2,       /*!< 14 Pend SV Interrupt                             */
-  SysTick_IRQn                  = -1,       /*!< 15 System Tick Interrupt                         */
-
-#endif
-
-/******  Device Specific Interrupt Numbers ********************************************************/
-/* ToDo: add here your device specific external interrupt numbers
-         according the interrupt handlers defined in startup_Device.s
-         eg.: Interrupt for Timer#1       TIM1_IRQHandler   ->   TIM1_IRQn                        */
-  DeviceInterrupt_IRQn        = 0,        /*!< Device Interrupt                                 */
-} IRQn_Type;
-
-
-/*
- * ==========================================================================
- * ----------- Processor and Core Peripheral Section ------------------------
- * ==========================================================================
- */
-
-/* Configuration of the Cortex-M# Processor and Core Peripherals */
-/* ToDo: set the defines according your Device                                                    */
-/* ToDo: define the correct core revision
-         __CM0_REV if your device is a CORTEX-M0 device
-         __CM3_REV if your device is a CORTEX-M3 device
-         __CM4_REV if your device is a CORTEX-M4 device                                           */
-//#define __CM#_REV                 0x0201    /*!< Core Revision r2p1                               */
-#if defined(__ARM_ARCH_6M__)
-#define __CM0_REV                 0x0201
-#elif defined(__ARM_ARCH_7M__)
-#define __CM3_REV                 0x0201
-#elif defined(__ARM_ARCH_7EM__)
-#define __CM4_REV                 0x0201
-#endif
-
-#define __NVIC_PRIO_BITS          2         /*!< Number of Bits used for Priority Levels          */
-#define __Vendor_SysTickConfig    0         /*!< Set to 1 if different SysTick Config is used     */
-#define __MPU_PRESENT             0         /*!< MPU present or not                               */
-/* ToDo: define __FPU_PRESENT if your devise is a CORTEX-M4                                       */
-#define __FPU_PRESENT             0        /*!< FPU present or not                                */
-
-/*@}*/ /* end of group <Device>_CMSIS */
-
-
-/* ToDo: include the correct core_cm#.h file
-         core_cm0.h if your device is a CORTEX-M0 device
-         core_cm3.h if your device is a CORTEX-M3 device
-         core_cm4.h if your device is a CORTEX-M4 device                                          */
-
-//#include <core_cm#.h>                       /* Cortex-M# processor and core peripherals           */
-#if defined(__ARM_ARCH_6M__)
-#include <core_cm0.h>
-#elif defined(__ARM_ARCH_7M__)
-#include <core_cm3.h>
-#elif defined(__ARM_ARCH_7EM__)
-#include <core_cm4.h>
-#endif
-
-/* ToDo: include your system_<Device>.h file
-         replace '<Device>' with your device name                                                 */
-#include "system_stm32f1xx.h"                /* <Device> System  include file                      */
-
-
-/******************************************************************************/
-/*                Device Specific Peripheral registers structures             */
-/******************************************************************************/
-/** @addtogroup <Device>_Peripherals <Device> Peripherals
-  <Device> Device Specific Peripheral registers structures
-  @{
-*/
-
-#if defined ( __CC_ARM   )
-#pragma anon_unions
-#endif
-
-/* ToDo: add here your device specific peripheral access structure typedefs
-         following is an example for a timer                                  */
-
-/*------------- 16-bit Timer/Event Counter (TMR) -----------------------------*/
-/** @addtogroup <Device>_TMR <Device> 16-bit Timer/Event Counter (TMR)
-  @{
-*/
-typedef struct
+typedef enum 
 {
-  __IO uint32_t EN;                         /*!< Offset: 0x0000   Timer Enable Register           */
-  __IO uint32_t RUN;                        /*!< Offset: 0x0004   Timer RUN Register              */
-  __IO uint32_t CR;                         /*!< Offset: 0x0008   Timer Control Register          */
-  __IO uint32_t MOD;                        /*!< Offset: 0x000C   Timer Mode Register             */
-       uint32_t RESERVED0[1];
-  __IO uint32_t ST;                         /*!< Offset: 0x0014   Timer Status Register           */
-  __IO uint32_t IM;                         /*!< Offset: 0x0018   Interrupt Mask Register         */
-  __IO uint32_t UC;                         /*!< Offset: 0x001C   Timer Up Counter Register       */
-  __IO uint32_t RG0;                        /*!< Offset: 0x0020   Timer Register                  */
-       uint32_t RESERVED1[2];
-  __IO uint32_t CP;                         /*!< Offset: 0x002C   Capture register                */
-} DeviceAbbreviation_TMR_TypeDef;
-/*@}*/ /* end of group <Device>_TMR */
+  DISABLE = 0, 
+  ENABLE = !DISABLE
+} FunctionalState;
+#define IS_FUNCTIONAL_STATE(STATE) (((STATE) == DISABLE) || ((STATE) == ENABLE))
+
+typedef enum
+{
+  SUCCESS = 0U,
+  ERROR = !SUCCESS
+} ErrorStatus;
+
+/**
+  * @}
+  */
 
 
-#if defined ( __CC_ARM   )
-#pragma no_anon_unions
-#endif
+/** @addtogroup Exported_macros
+  * @{
+  */
+#define SET_BIT(REG, BIT)     ((REG) |= (BIT))
 
-/*@}*/ /* end of group <Device>_Peripherals */
+#define CLEAR_BIT(REG, BIT)   ((REG) &= ~(BIT))
 
+#define READ_BIT(REG, BIT)    ((REG) & (BIT))
 
-/******************************************************************************/
-/*                         Peripheral memory map                              */
-/******************************************************************************/
-/* ToDo: add here your device peripherals base addresses
-         following is an example for timer                                    */
-/** @addtogroup <Device>_MemoryMap <Device> Memory Mapping
-  @{
-*/
+#define CLEAR_REG(REG)        ((REG) = (0x0))
 
-/* Peripheral and SRAM base address */
-#define DeviceAbbreviation_FLASH_BASE       (0x00000000UL)                              /*!< (FLASH     ) Base Address */
-#define DeviceAbbreviation_SRAM_BASE        (0x20000000UL)                              /*!< (SRAM      ) Base Address */
-#define DeviceAbbreviation_PERIPH_BASE      (0x40000000UL)                              /*!< (Peripheral) Base Address */
+#define WRITE_REG(REG, VAL)   ((REG) = (VAL))
 
-/* Peripheral memory map */
-#define DeviceAbbreviationTIM0_BASE         (DeviceAbbreviation_PERIPH_BASE)          /*!< (Timer0    ) Base Address */
-#define DeviceAbbreviationTIM1_BASE         (DeviceAbbreviation_PERIPH_BASE + 0x0800) /*!< (Timer1    ) Base Address */
-#define DeviceAbbreviationTIM2_BASE         (DeviceAbbreviation_PERIPH_BASE + 0x1000) /*!< (Timer2    ) Base Address */
-/*@}*/ /* end of group <Device>_MemoryMap */
+#define READ_REG(REG)         ((REG))
+
+#define MODIFY_REG(REG, CLEARMASK, SETMASK)  WRITE_REG((REG), (((READ_REG(REG)) & (~(CLEARMASK))) | (SETMASK)))
+
+#define POSITION_VAL(VAL)     (__CLZ(__RBIT(VAL))) 
 
 
-/******************************************************************************/
-/*                         Peripheral declaration                             */
-/******************************************************************************/
-/* ToDo: add here your device peripherals pointer definitions
-         following is an example for timer                                    */
+/**
+  * @}
+  */
 
-/** @addtogroup <Device>_PeripheralDecl <Device> Peripheral Declaration
-  @{
-*/
+#if defined (USE_HAL_DRIVER)
+ #include "stm32f1xx_hal.h"
+#endif /* USE_HAL_DRIVER */
 
-#define DeviceAbbreviation_TIM0        ((DeviceAbbreviation_TMR_TypeDef *) DeviceAbbreviationTIM0_BASE)
-#define DeviceAbbreviation_TIM1        ((DeviceAbbreviation_TMR_TypeDef *) DeviceAbbreviationTIM0_BASE)
-#define DeviceAbbreviation_TIM2        ((DeviceAbbreviation_TMR_TypeDef *) DeviceAbbreviationTIM0_BASE)
-/*@}*/ /* end of group <Device>_PeripheralDecl */
-
-/*@}*/ /* end of group <Device>_Definitions */
 
 #ifdef __cplusplus
 }
-#endif
+#endif /* __cplusplus */
 
-#endif  /* <Device>_H */
+#endif /* __STM32F1xx_H */
+/**
+  * @}
+  */
+
+/**
+  * @}
+  */
+  
+
+
+
+/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
