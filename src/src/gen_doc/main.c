@@ -24,7 +24,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "util.h"
-#include "wifi_scanner.h"
+#include "rf_scanner.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -100,7 +100,7 @@ int main(void)
     MX_TIM2_Init();
     /* USER CODE BEGIN 2 */
     util_init();
-    wifi_scanner_init();
+    rf_scanner_init();
     /* USER CODE END 2 */
 
     /* Infinite loop */
@@ -108,7 +108,7 @@ int main(void)
     while (1)
     {
         /* USER CODE END WHILE */
-        wifi_scanner_step();
+        rf_scanner_step();
         blink_led();
         /* USER CODE BEGIN 3 */
     }

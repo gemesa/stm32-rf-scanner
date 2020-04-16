@@ -1,6 +1,6 @@
-# Wi-Fi scanner
+# 2.4GHz RF scanner
 
-This project contains the source code of an nRF24L01+ and Blue Pill (STM32F103C8T6) based Wi-Fi scanner. The Blue Pill scans frequencies from 2.400GHz to 2.525GHz (1MHz resolution) with nRF24L01+ and plots the activity on each frequency through UART.
+This project contains the source code of an nRF24L01+ and Blue Pill (STM32F103C8T6) based RF scanner. The Blue Pill scans frequencies from 2.400GHz to 2.525GHz (1MHz resolution) with nRF24L01+ and plots the activity on each frequency through UART.
 
 This is what the UART output looks like (explained below):
 

@@ -1,6 +1,6 @@
 /**
  ******************************************************************************
- * @file wifi_scanner.c
+ * @file rf_scanner.c
  * @brief Scans frequencies from 2.400GHz to 2.525GHz (1MHz resolution)
  * with nRF24L01+ and plots the activity on each frequency through UART.
  * @author gemesa
@@ -35,8 +35,8 @@ static void get_freq_data(uint8_t aui8_rpd[]);
 static uint8_t max_array(uint8_t aui8_array[], uint8_t ui8_size);
 static uint8_t calc_norm(uint8_t aui8_rpd[], uint8_t aui8_rpd_norm[], uint8_t ui8_size);
 static void plot_freq_data(uint8_t aui8_rpd[]);
-void wifi_scanner_step(void);
-void wifi_scanner_init(void);
+void rf_scanner_step(void);
+void rf_scanner_init(void);
 static void plot_layout(void);
 static void nrf24l01p_init(void);
 
@@ -235,7 +235,7 @@ static void plot_freq_data(uint8_t aui8_rpd[])
  * @brief Step function of the SWC.
  * @author gemesa
  */
-void wifi_scanner_step(void)
+void rf_scanner_step(void)
 {
     /* array to store the counted RPD flags for each channel
      * an RPD flag indicates whether the frequency is free or occupied */
@@ -249,7 +249,7 @@ void wifi_scanner_step(void)
  * @brief Init function of the SWC.
  * @author gemesa
  */
-void wifi_scanner_init(void)
+void rf_scanner_init(void)
 {
     nrf24l01p_init();
 }

@@ -70,18 +70,18 @@ The STM32F103xB macro is defined for building. Optimization level is set to -O3.
 Includes:
 ```c
 #include "util.h"
-#include "wifi_scanner.h"
+#include "rf_scanner.h"
 ```
 
 Init functions:
 ```c
 util_init();
-wifi_scanner_init();
+rf_scanner_init();
 ```
 
 Step functions:
 ```c
-wifi_scanner_step();
+rf_scanner_step();
 blink_led();
 ```
 
