@@ -87,7 +87,12 @@ blink_led();
 
 ## Building
 
-The project can be built in the Eclipse GUI or by calling `eclipsec.exe` with the proper arguments from command line.
+The project can be built in the Eclipse GUI or from command line:
+
+```
+cd <path>\2-4ghz-rf-scanner\src\Debug
+make all
+```
 
 ## Pin description
 

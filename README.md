@@ -59,10 +59,18 @@ A detailed description can be found in [docs/project_description.md](docs/projec
 ## Deployment
 
 Quick deployment process:
-- Build the SW using Eclipse and GCC ARM. The Eclipse project is stored in [src](src).
+- Build the SW from command line with `make` and `arm-none-eabi-gcc`:
+
+```
+cd <path>\2-4ghz-rf-scanner\src\Debug
+make all
+```
+
 - Connect the configured pins (SWD, SPI and UART). Refer to [docs/project_description.md#pin-description](docs/project_description.md#pin-description).
 - Download the binary to the Blue Pill with STM32CubeProgrammer.
 - Run the SW and plot the UART output using an USB-UART adapter and a serial port terminal.
+
+Note: The SW can be built from Eclipse also. `.project` is stored in [src](src).
 
 ## Results
 
