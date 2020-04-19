@@ -22,6 +22,6 @@ Mandatory tools:
 Optional tools:
 - OpenOCD (0.10.0-5-20171110-1117) + GDB ARM (9-2019-q4-major, 8.3.0.20190709-git)
 - STSW-LINK007 (2.36.26)
-- [tools/cubemx_importer.py](tools/cubemx_importer.py) (Python 3.8.2)
+- [tools/cubemx_importer.py](https://github.com/gemesa/2-4ghz-rf-scanner/blob/master/tools/cubemx_importer.py) (Python 3.8.2)
 - Eclox doxygen plug-in (0.12.1)
 - Hercules (3.2.8)
