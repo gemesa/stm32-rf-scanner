@@ -45,7 +45,7 @@ The axes:
         |
         V
 
-The time difference between each line is ~4s. The greyscale characters represent the signal strengths relative to each other. The signal classification have been added manually.
+The time difference between each line is ~4s. The greyscale characters represent the signal strengths relative to each other. The signal classification has been added manually.
 
 The code of this project has been implemented using
 
