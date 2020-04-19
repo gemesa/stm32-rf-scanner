@@ -60,6 +60,8 @@ A similar, Arduino libraries based design by **cpixip** can be found at [forum.a
 
 ## Deployment
 
+**Important: the project has been developed and tested on Windows only.**
+
 Quick deployment process:
 - Build the SW from command line with `make` and `arm-none-eabi-gcc`:
 
@@ -72,7 +74,7 @@ make all
 - Download the binary to the Blue Pill with STM32CubeProgrammer.
 - Run the SW and plot the UART output using an USB-UART adapter and a serial port terminal.
 
-Note: The SW can be built from Eclipse also. `.project` is stored in [src](src).
+Note: the SW can be built from Eclipse also. `.project` is stored in [src](src).
 
 ## Results
 
