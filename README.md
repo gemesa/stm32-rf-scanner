@@ -47,7 +47,7 @@ The axes:
 
 The time difference between each line is ~4s. The greyscale characters represent the signal strengths relative to each other. The signal classification have been added manually.
 
-A similar, Arduino libraries based design by **cpixip** can be found at [forum.arduino.cc](https://forum.arduino.cc/index.php?topic=54795.0). The code of this project has been implemented using
+The code of this project has been implemented using
 
 - Eclipse,
 - STM32Fx project templates,
@@ -55,6 +55,8 @@ A similar, Arduino libraries based design by **cpixip** can be found at [forum.a
 - STM32 HAL.
 
 A detailed description can be found in [docs/project_description.md](docs/project_description.md).
+
+A similar, Arduino libraries based design by **cpixip** can be found at [forum.arduino.cc](https://forum.arduino.cc/index.php?topic=54795.0).
 
 ## Deployment
 
