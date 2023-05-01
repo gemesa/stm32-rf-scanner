@@ -1,6 +1,6 @@
 # 2.4GHz RF scanner
 
-This project contains the source code of an nRF24L01+ and Blue Pill (STM32F103C8T6) based RF scanner. The Blue Pill scans frequencies from 2.400GHz to 2.525GHz (1MHz resolution) with nRF24L01+ and plots the activity on each frequency through UART.
+This project contains the source code of an [nRF24L01+](https://www.sparkfun.com/datasheets/Components/SMD/nRF24L01Pluss_Preliminary_Product_Specification_v1_0.pdf) and [Blue Pill (STM32F103C8T6)](https://stm32-base.org/boards/STM32F103C8T6-Blue-Pill.html) based RF scanner. The Blue Pill scans frequencies from 2.400GHz to 2.525GHz (1MHz resolution) with nRF24L01+ and plots the activity on each frequency through UART.
 
 This is what the UART output looks like (explained below):
 
@@ -49,10 +49,10 @@ The time difference between each line is ~4s. The greyscale characters represent
 
 The code of this project has been implemented using
 
-- Eclipse,
-- STM32Fx project templates,
-- STM32CubeMX,
-- STM32 HAL.
+- [Eclipse](https://www.eclipse.org/),
+- [STM32Fx project templates](https://eclipse-embed-cdt.github.io/templates/stm32f/),
+- [STM32CubeMX](https://www.st.com/en/development-tools/stm32cubemx.html),
+- [STM32 HAL](https://www.st.com/content/ccc/resource/technical/document/user_manual/72/52/cc/53/05/e3/4c/98/DM00154093.pdf/files/DM00154093.pdf/jcr:content/translations/en.DM00154093.pdf).
 
 A detailed description can be found in [docs/project_description.md](docs/project_description.md).
 
@@ -71,7 +71,7 @@ make all
 ```
 
 - Connect the configured pins (SWD, SPI and UART). Refer to [docs/project_description.md#pin-description](docs/project_description.md#pin-description).
-- Download the binary to the Blue Pill with STM32CubeProgrammer.
+- Download the binary to the Blue Pill with [STM32CubeProgrammer](https://www.st.com/en/development-tools/stm32cubeprog.html).
 - Run the SW and plot the UART output using an USB-UART adapter and a serial port terminal.
 
 Note: the SW can be built from Eclipse also. `.project` is stored in [src](src).

@@ -7,34 +7,34 @@ This document contains the detailed project description.
 The prerequisites and the toolchain are detailed in [Mastering STM32](https://leanpub.com/mastering-stm32) written by **Carmine Noviello**.
 
 ### Mandatory tools:
-- Eclipse
-  - C/C++ Development Tools SDK
-  - GNU ARM Eclipse Plug-ins
-- GCC ARM
-- make
-- STM32CubeMX
-- STM32CubeProgrammer
+- [Eclipse](https://www.eclipse.org/)
+  - [C/C++ Development Tools SDK](https://marketplace.eclipse.org/content/eclipse-embedded-cc)
+  - [GNU ARM Eclipse Plug-ins](https://marketplace.eclipse.org/content/eclipse-embedded-cc)
+- [GCC ARM](https://developer.arm.com/Tools%20and%20Software/GNU%20Toolchain)
+- [make](https://www.gnu.org/software/make/)
+- [STM32CubeMX](https://www.st.com/en/development-tools/stm32cubemx.html)
+- [STM32CubeProgrammer](https://www.st.com/en/development-tools/stm32cubeprog.html)
 
-Note: Flash loader demonstrator can also be used for downloading but it is outdated.
+Note: [Flash loader demonstrator](https://www.st.com/en/development-tools/flasher-stm32.html) can also be used for downloading but it is outdated.
 
 The version numbers are stored in [docs/toolchain_versions.md](https://github.com/gemesa/2-4ghz-rf-scanner/blob/master/docs/toolchain_versions.md). Some issues which are not detailed in [Mastering STM32](https://leanpub.com/mastering-stm32) and might be encountered during the use of the toolchain are detailed in [docs/toolchain_issues.md](https://github.com/gemesa/2-4ghz-rf-scanner/blob/master/docs/toolchain_issues.md).
 
 ### Optional tools:
-- OpenOCD + GDB ARM
-- STSW-LINK007
+- [OpenOCD](https://openocd.org/) + [GDB ARM](https://developer.arm.com/Tools%20and%20Software/GNU%20Toolchain)
+- [STSW-LINK007](https://www.st.com/en/development-tools/stsw-link007.html)
 - [tools/cubemx_importer.py](https://github.com/gemesa/2-4ghz-rf-scanner/blob/master/tools/cubemx_importer.py)
-- Eclox doxygen plug-in
-- Hercules (serial port terminal)
+- [Eclox doxygen plug-in](https://marketplace.eclipse.org/content/eclox)
+- [Hercules](https://www.hw-group.com/software/hercules-setup-utility) (serial port terminal)
 
 Note: STSW-LINK007 is used to upgrade the firmware of the ST-LINK for OpenOCD if necessary.
 
 ### Mandatory HWs:
-- Blue Pill
-- nRF24L01+
-- USB-UART adapter
+- [Blue Pill](https://stm32-base.org/boards/STM32F103C8T6-Blue-Pill.html)
+- [nRF24L01+](https://www.sparkfun.com/datasheets/Components/SMD/nRF24L01Pluss_Preliminary_Product_Specification_v1_0.pdf)
+- [USB-UART adapter](https://ftdichip.com/products/ft232rl/)
 
 ### Optional HWs:
-- ST-LINK/V2
+- [ST-LINK/V2](https://www.st.com/en/development-tools/st-link-v2.html)
 
 Note: flash can be accessed without SWD using other interfaces. Refer to [www.st.com](https://www.st.com/en/development-tools/stm32cubeprog.html) for more information.
 
