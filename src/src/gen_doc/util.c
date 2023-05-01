@@ -6,9 +6,9 @@
  *
  * @attention
  *
- * Copyright (c) 2020 Andr·s GÈmes. All rights reserved.
+ * Copyright (c) 2023 Andr√°s G√©mes. All rights reserved.
  *
- * This software component is licensed by Andr·s GÈmes under GNU GPLv3 license.
+ * This software component is licensed by Andr√°s G√©mes under GNU GPLv3 license.
  * You may obtain a copy of the license at: opensource.org/licenses/GPL-3.0
  *
  * SPDX-License-Identifier: gpl-3.0
