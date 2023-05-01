@@ -90,7 +90,7 @@ blink_led();
 The project can be built in the Eclipse GUI or from command line:
 
 ```
-cd <path>\2-4ghz-rf-scanner\src\Debug
+cd <path>\stm32-rf-scanner\src\Debug
 make all
 ```
 

@@ -66,7 +66,7 @@ Quick deployment process:
 - Build the SW from command line with `make` and `arm-none-eabi-gcc`:
 
 ```
-cd <path>\2-4ghz-rf-scanner\src\Debug
+cd <path>\stm32-rf-scanner\src\Debug
 make all
 ```
 
